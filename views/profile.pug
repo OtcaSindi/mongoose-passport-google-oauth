@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .container
+    .row.d-flex.justify-content-center
+      .col-xs-5.col-xl-5.text-center.m-5
+        a(href="/logout" class="btn btn-primary") Logout
+        if(user.google)
+          p= user.google.name

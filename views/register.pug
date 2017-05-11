@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .container
+    .row.d-flex.justify-content-center.p-3
+      .col-xs-4.text-center
+        h1 Hello 
+    .row.d-flex.justify-content-center.p-3
+      .col-xs-4.text-center
+        form(method="post" action="/register").m-5
+          .form-group
+            input(type="text" name="username" class="form-control")
+          .form-group
+            input(type="text" name="password" class="form-control")
+          .form-group
+            input(type="submit" class="btn btn-primary" value="Login")
+          .form-group
+            a(href="/auth/google" class="btn btn-danger") Google

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const passport = require('../auth/google.js');
+const passport = require('../auth/auth.js');
 const User = require('../models/User.js');
 
 
@@ -23,11 +23,10 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
+//Local register
 router.post('/register', (req, res) => {
-  User.register(new User({ username : req.body.username }), req.body.password, (err, user) => {
-    if (err) {
-      res.render('register', { user });
-    }
+  User.register(new User({ username : req.body.username }), req.body.password, (error, user) => {
+    if (error) return res.render('register', { user, error: error.message });
     passport.authenticate('local')(req, res, ()=> {
       res.redirect('/');
     });
@@ -38,6 +37,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
   res.redirect('/');
 });
 
+//Google register
 router.get('/auth/google',
   passport.authenticate('google', {scope: ['profile', 'email']})
   );

@@ -2,21 +2,25 @@ extends layout
 
 block content
   if(!user)
-    a(href="/register" class="btn btn-primary") Register
+    a(href="/register" class="btn btn-primary m-2") Register
+  else
+    a(href="/logout" class="btn btn-primary m-2") Logout
   .container
     .row.d-flex.justify-content-center.p-3
       .col-xs-4.text-center
-        if(user)
-          p= user.username
         h1 Hello 
+        if(user)
+          h3= user.username
     .row.d-flex.justify-content-center.p-3
       .col-xs-4.text-center
+      if(!user)
         form(method="post" action="/login").m-5
           .form-group
-            input(type="text" name="username" class="form-control")
+            label(for="username") Username
+            input(type="text" name="username" class="form-control" placeholder="Username")
           .form-group
-            input(type="text" name="password" class="form-control")
+            label(for="password") Username
+            input(type="text" name="password" class="form-control" placeholder="Password")
           .form-group
-            input(type="submit" class="btn btn-primary" value="Login")
-          .form-group
-            a(href="/auth/google" class="btn btn-danger") Google
+            input(type="submit" class="btn btn-primary m-2" value="Login")
+            a(href="/auth/google" class="btn btn-danger m-2") Google            

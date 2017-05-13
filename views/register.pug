@@ -9,10 +9,14 @@ block content
       .col-xs-4.text-center
         form(method="post" action="/register").m-5
           .form-group
-            input(type="text" name="username" class="form-control")
+            label(for="username") Username
+            input(type="text" name="username" class="form-control" placeholder="Username")
+            if(error)
+              p Username already exists
           .form-group
-            input(type="text" name="password" class="form-control")
+            label(for="password") Password
+            input(type="password" name="password" class="form-control" placeholder="Password")
           .form-group
-            input(type="submit" class="btn btn-primary" value="Login")
+            input(type="submit" class="btn btn-primary" value="Register")
           .form-group
             a(href="/auth/google" class="btn btn-danger") Google

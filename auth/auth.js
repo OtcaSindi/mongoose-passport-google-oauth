@@ -10,12 +10,7 @@ passport.use(new GoogleStrategy({
 
 },
 (token, refreshToken, profile, done) => {
-
-    // make the code asynchronous
-    // User.findOne won't fire until we have all our data back from Google
     process.nextTick(() => {
-
-        // try to find the user based on their google id
         User.findOne({ 'google.id' : profile.id }, (err, user) => {
           if (err)
             return done(err);

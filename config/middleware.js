@@ -1,4 +1,5 @@
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -8,8 +9,10 @@ const helmet = require('helmet');
 
 module.exports = (app) => {
 
+  app.use(compression());
   app.use(logger('dev'));
   app.use(helmet());
+
 
   app.set('view engine', 'pug');
   app.use('/public', express.static('public'));

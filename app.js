@@ -1,21 +1,17 @@
-require('dotenv').config()
+require('dotenv').config();
 const mongoose = require('mongoose');
 const routes = require('./routes/index.js');
+const helpers = require('./config/helpers.js');
+const middleware = require('./config/middleware.js');
 
 const app = require('express')();
-const port = process.env.PORT;
-
-require('./config/middleware.js')(app);
-
+const port = process.env.PORT || 3000;
+const mongoURL = process.env.MONGODB_URI || process.env.DB_HOST;
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.DB_HOST);
+
+middleware(app);
+mongoose.connect(mongoURL);
 
 app.use('/', routes);
 
-app.listen(port, () => {
-  console.log("+---------------------------------------+");
-  console.log("|                                       |");
-  console.log(`|  [\x1b[34mSERVER\x1b[37m] Listening on port: \x1b[36m${port} 🤖  \x1b[37m |`);
-  console.log("|                                       |");
-  console.log("\x1b[37m+---------------------------------------+");
-});
+app.listen(port, helpers.listenCallback(port));
